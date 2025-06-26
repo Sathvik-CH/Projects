@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Order</title>
+    <link rel="stylesheet" href="styles/med.css">
+</head>
+<body>
+    <h1>Order Medicine</h1>
+    <div class="form-group">
+        <label for="medicineName">Medicine Name:</label>
+        <input type="text" id="medicineName" placeholder="Enter medicine name">
+    </div>
+    <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" placeholder="Enter quantity">
+    </div>
+    <div class="form-group">
+        <label for="customerName">Customer Name:</label>
+        <input type="text" id="customerName" placeholder="Enter your name">
+    </div>
+    <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" rows="4" cols="50" placeholder="Enter your address"></textarea>
+    </div>
+    <button onclick="submitOrder()">Submit Order</button>
+
+    <div id="responseMessage" style="margin-top: 20px;"></div>
+
+    <script>
+        async function submitOrder() {
+            const medicineName = document.getElementById('medicineName').value;
+            const quantity = document.getElementById('quantity').value;
+            const customerName = document.getElementById('customerName').value;
+            const address = document.getElementById('address').value;
+
+            if (!medicineName || !quantity || !customerName || !address) {
+                alert("Please fill in all the fields.");
+                return;
+            }
+
+            const orderDetails = {
+                medicineName: medicineName,
+                quantity: parseInt(quantity, 10),
+                customerName: customerName,
+                address: address
+            };
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(orderDetails),
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    document.getElementById('responseMessage').textContent = 'Order placed successfully!';
+                } else {
+                    document.getElementById('responseMessage').textContent = 'Error: ' + data.error;
+                }
+            } catch (error) {
+                document.getElementById('responseMessage').textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

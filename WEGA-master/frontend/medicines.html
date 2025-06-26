@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicines - Wega Telemedicine</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="assets/images/logo.jpg" height="70px" width="70px">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Help</a></li>
+                <li><a href="#" onclick="openModal()">Logout</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="medicines-section">
+            <h2>MEDICINE</h2>
+            <div class="medicine-list">
+                <div class="medicine-item">
+                    <span>Paracetamol</span>
+                    <span class="arrow">&rsaquo;</span>
+                </div>
+                <div class="medicine-item">
+                    <span>Ibuprofen</span>
+                    <span class="arrow">&rsaquo;</span>
+                </div>
+                <div class="medicine-item">
+                    <span>Amoxicillin</span>
+                    <span class="arrow">&rsaquo;</span>
+                </div>
+                <div class="medicine-item">
+                    <span>Metformin</span>
+                    <span class="arrow">&rsaquo;</span>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="btn-secondary" onclick="window.location.href='med.html'">Buy Medicine</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Wega Telemedicine. All rights reserved.</p>
+    </footer>
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to log out?</p>
+            <button onclick="logout()">Yes, Logout</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+    <script src="scripts/main.js"></script>
+</body>
+</html>

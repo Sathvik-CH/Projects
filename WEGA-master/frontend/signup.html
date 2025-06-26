@@ -1,0 +1,49 @@
+<!-- signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Wega Telemedicine</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <main>
+        <section class="auth-section">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <a href="login.html">Login</a>
+                    <a href="#" class="active">Sign In</a>
+                </div>
+                <form id="signupForm">
+                    <div class="input-group">
+                        <label for="userId">User ID</label>
+                        <input type="text" id="userId" placeholder="Enter User ID" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter Email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Create Password</label>
+                        <input type="password" id="password" placeholder="Enter Password" required>
+                        <span class="toggle-password">👁️</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirmPassword">Retype Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Retype Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Sign In</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Wega Telemedicine. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts/auth.js"></script>
+</body>
+</html>

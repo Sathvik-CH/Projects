@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wega Telemedicine</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+                <img src="assets/images/logo.jpg" height="70px" width="70px">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Help</a></li>
+                <li><a href="#" onclick="openModal()">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>WEGA <br><span>TELEMEDICINE</span></h1>
+            <div class="hero-content">
+                <img src="assets/images/doc.png" alt="Doctor" class="hero-image" >
+            </div>
+        </section>
+
+        <!-- Services Section with Scrollable Cards -->
+        <section class="services">
+            <h2>SERVICES WE PROVIDE</h2>
+            <div class="service-cards-container">
+                <div class="service-card">Telemedicine</div>
+                <div class="service-card">Medicare</div>
+                <div class="service-card">Book Appointment</div>
+                <div class="service-card">Emergency Services</div>
+                <div class="service-card">Consultation</div>
+                <div class="service-card">Virtual Therapy</div>
+                <div class="service-card">Pharmacy Delivery</div>
+
+            </div>
+        </section>
+        
+        
+
+        <!-- Information Section -->
+        <section class="info">
+            <div class="info-box">
+                <h3>What is TELEMEDICINE?</h3>
+                <p>
+                    Telemedicine refers to the use of telecommunications technology to provide healthcare services remotely, allowing patients to consult with doctors, receive diagnoses, and access treatments from their own locations. It helps reduce travel, increase convenience, and expand access to care.
+                </p>
+            </div>
+            <div class="info-box">
+                <h3>Why WEGA?</h3>
+                <p>
+                    Wega enhances access to healthcare, especially for people in remote or underserved areas, by enabling real-time communication between patients and healthcare providers without the need for physical visits.
+                </p>
+                <button class="btn-secondary" id="goToTopBtn">Go to Top</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Wega Telemedicine. All rights reserved.</p>
+    </footer>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to log out?</p>
+            <button onclick="logout()">Yes, Logout</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

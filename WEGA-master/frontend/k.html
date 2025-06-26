@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Hospitals Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nearby Hospitals</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map and set its view to a specific location
+        const map = L.map('map').setView([17.398040,78.332894], 13); // Dallas, TX
+
+        // Load and display tile layers (OSM)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Function to fetch hospitals using Nominatim API
+        async function fetchNearbyHospitals(latitude, longitude) {
+            const url = `https://nominatim.openstreetmap.org/search.php?q=hospital+near+${latitude},${longitude}&format=jsonv2`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                data.forEach((hospital) => {
+                    const lat = hospital.lat;
+                    const lon = hospital.lon;
+                    const name = hospital.display_name;
+
+                    // Add a marker for each hospital
+                    L.marker([lat, lon]).addTo(map)
+                        .bindPopup(`<b>${name}</b><br>Lat: ${lat}, Lon: ${lon}`);
+                });
+            } catch (error) {
+                console.error("Error fetching hospitals:", error);
+            }
+        }
+
+        // Fetch hospitals on page load
+        window.onload = function() {
+            fetchNearbyHospitals(17.398040,78.332894); // Dallas, TX
+        };
+    </script>
+</body>
+</html>

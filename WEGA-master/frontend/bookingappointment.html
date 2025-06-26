@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - Wega Telemedicine</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="assets/images/logo.jpg" height="70px" width="70px">
+    </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Help</a></li>
+                <li><a href="#" onclick="openModal()">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="booking-section">
+            <h2>TELEMEDICINE</h2>
+
+            <!-- Book Your Slot Section -->
+            <div class="book-slot">
+                <label for="slot">BOOK YOUR SLOT</label>
+                <input type="text" id="slot" placeholder="Select Date">
+            </div>
+
+            <!-- Optional Information Section -->
+            <div class="optional-info">
+                <label for="info">TELL US SOMETHING ABOUT YOU (OPTIONAL)</label>
+                <textarea id="info" placeholder="Provide any health history or current conditions..."></textarea>
+            </div>
+
+            <!-- Doctor Selection Section -->
+            <div class="doctor-selection">
+                <label for="doctor">DOCTOR YOU WANT TO CONSULT</label>
+                <select id="doctor">
+                    <option value="gp">General Practitioner (GP)</option>
+                    <option value="cardiologist">Cardiologist</option>
+                    <option value="dermatologist">Dermatologist</option>
+                    <option value="pediatrician">Pediatrician</option>
+                </select>
+            </div>
+
+            <!-- Booking Button -->
+            <div class="booking-btn">
+                <button class="btn-primary" id="bookButton">Book Your Slot</button>
+            </div>
+            <button class="btn-primary" id="bookButton" onclick="window.location.href='k.html'">Map</button>
+
+
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Wega Telemedicine. All rights reserved.</p>
+    </footer>
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Initialize Flatpickr
+        flatpickr("#slot", {
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+            minDate: "today", // Disable past dates
+            enableTime: false // Only enable date selection
+        });
+
+        // Add event listener for booking button
+        // Add event listener for booking button
+document.getElementById('bookButton').addEventListener('click', async function() {
+    const selectedDate = document.getElementById('slot').value;
+    const additionalInfo = document.getElementById('info').value;
+    const selectedDoctor = document.getElementById('doctor').value;
+    
+    // Retrieve userId (example: stored in localStorage after login)
+    const userId = localStorage.getItem('userId'); // Make sure userId is stored in localStorage after login
+
+    // Ensure userId, date, and doctor are not empty
+    if (!userId) {
+        alert('User ID is missing. Please log in.');
+        return;
+    }
+    if (!selectedDate) {
+        alert('Please select a date for your appointment.');
+        return;
+    }
+    if (!selectedDoctor) {
+        alert('Please select a doctor.');
+        return;
+    }
+
+    try {
+         console.log('userId:', userId);
+         console.log('selectedDate:', selectedDate);
+         console.log('selectedDoctor:', selectedDoctor);
+
+        const response = await fetch('http://localhost:5000/api/appointments/book', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` // Include token if using authentication
+            },
+            body: JSON.stringify({
+                userId: userId,
+                date: selectedDate,
+                doctor: selectedDoctor,
+                additionalInfo: additionalInfo
+            })
+        });
+
+        const data = await response.json();
+        console.log('Response data:', data);
+
+        if (response.ok) {
+            alert('Appointment booked successfully!');
+            console.log('Appointment:', data.appointment);
+        } else {
+            alert(`Failed to book appointment: ${data.message}`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to book appointment.');
+    }
+});
+
+    </script>
+
+    <!-- Logout Modal -->
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to log out?</p>
+            <button onclick="logout()">Yes, Logout</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/auth.js"></script>
+</body>
+</html>

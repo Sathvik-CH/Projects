@@ -1,0 +1,614 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+header text{
+    display: flex;
+    color: #000;
+    position: absolute;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+header nav a:hover {
+    color: #007bff;
+}
+
+header nav a:active, header nav a.active {
+    color: #007bff;
+}
+
+.hero {
+    background-color: #fafeff;
+    padding: 0px 0px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.hero h1 {
+    font-size: 5rem;
+    color: #000000;
+    position: absolute;
+    left: 150px;
+    
+}
+
+.hero span {
+    font-size: 1.5rem;
+    color: #000000;
+    position: absolute;
+    
+}
+
+.hero img {
+    width: 120%;
+    border-radius: 12px;
+    margin: 20px 0;
+    position: relative;
+    left: 450px;
+}
+
+/* Services Section */
+.services {
+    background-color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.services h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Scrollable Cards */
+.service-cards-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px;
+    scroll-behavior: smooth;
+}
+
+.service-card {
+    background-color: #f0f0f0;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    flex-shrink: 0;
+}
+.service-card h6 {
+    position: relative;
+    bottom: 5px;
+}
+
+/* Information Section */
+.info {
+    background-color: #f8f9fa;
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center the items */
+    text-align: center;
+    gap: 20px; 
+}
+
+.info-box {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px; /* Set a max-width for better readability */
+    text-align: center;
+} /* Added the missing closing curly brace */
+
+/* Footer Styling */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Button Styling */
+.btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: bottom;     /* Centers content vertically */
+}
+
+
+
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #218838;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    position: relative;
+    text-align: center;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .hero-text h2 {
+        font-size: 1.8rem;
+    }
+
+    .service-cards-container {
+        padding: 10px 0;
+    }
+
+    .service-card {
+        min-width: 150px;
+    }
+
+    .info-box {
+        width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero {
+        padding: 30px 10px;
+    }
+
+    .hero-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .service-card {
+        width: 100%;
+    }
+
+    .info-box {
+        width: 100%;
+        margin: 10px;
+    }
+}
+
+/* Enable Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+/* Video Call Styles */
+/* Video Call Styles */
+.video-call {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.video-call video {
+    width: 45%;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.video-call-container {
+    margin: 20px 0;
+}
+/* Medicines Section Styles */
+.medicines-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f8f9fa;
+}
+
+.medicine-list {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 0;
+}
+
+.medicine-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ccc;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.medicine-item:hover {
+    background-color: #e3f2fd;
+}
+
+.medicine-item:last-child {
+    border-bottom: none;
+}
+
+.arrow {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Buttons Styles */
+.buttons {
+    margin-top: 30px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #218838;
+}
+/* Services Section */
+.services-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f8f9fa;
+}
+
+.services-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
+.service-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.service-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.service-card button {
+    margin-top: 10px;
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+}
+
+/* How to Use Our Services Section */
+.how-to-use {
+    background-color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.information-box {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+}
+
+/* Help Section */
+.help-section {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.help-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.help-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.help-section li {
+    margin: 10px 0;
+}
+
+.help-section a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.help-section a:hover {
+    text-decoration: underline;
+}
+/* Booking Section */
+.booking-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f8f9fa;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.booking-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
+.book-slot, .optional-info, .doctor-selection {
+    margin-bottom: 30px;
+}
+
+.book-slot label, .optional-info label, .doctor-selection label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.book-slot input, .doctor-selection select, .optional-info textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+}
+
+.optional-info textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* Calendar Placeholder */
+.calendar {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Booking Button */
+.booking-btn {
+    margin-top: 20px;
+}
+
+.booking-btn button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.booking-btn button:hover {
+    background-color: #0056b3;
+}
+
+/* Know More Link */
+.know-more {
+    margin-top: 30px;
+}
+
+.know-more a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.know-more a:hover {
+    text-decoration: underline;
+}
+/* Authentication Section */
+.auth-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.auth-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+.auth-tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.auth-tabs a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.auth-tabs a.active {
+    border-bottom: 2px solid #6200ea;
+    color: #6200ea;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+.btn-primary {
+    background-color: #6200ea;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.btn-primary:hover {
+    background-color: #4e00b0;
+}
+
+.toggle-password {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 40px;
+    font-size: 1.2rem;
+}
+
+/* Responsive Styling */
+@media (max-width: 480px) {
+    .auth-container {
+        width: 300px;
+    }
+}
+
