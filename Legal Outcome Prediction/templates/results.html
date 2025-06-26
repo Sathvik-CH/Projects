@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block title %}Legal Outcome Prediction - Results{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-lg-10 mx-auto text-center">
+            <h1 class="mb-3">Case Prediction Results</h1>
+            <p class="lead text-muted">Here's our analysis based on the information you provided</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Main Results Card -->
+            <div class="card shadow mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Prediction Summary</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row align-items-center mb-4">
+                        <div class="col-md-6 text-center text-md-start">
+                            <h5>Case Type: {{ result.case_type|capitalize }}</h5>
+                            <div class="mt-3">
+                                <span class="prediction-badge {% if result.outcome == 'win' %}bg-success{% else %}bg-danger{% endif %}">
+                                    {% if result.outcome == 'win' %}
+                                        <i class="fas fa-check-circle me-2"></i> Favorable Outcome Likely
+                                    {% else %}
+                                        <i class="fas fa-times-circle me-2"></i> Challenging Outcome Expected
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="chart-container">
+                                <canvas id="confidenceGauge"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="prediction-result">
+                        <h5>What This Means</h5>
+                        <p>
+                            <strong>Prediction:</strong> {{ result.outcome }} (Confidence: {{ (result.probability * 100) }}%)
+                            <br><br>
+                            {{ result.explanation }}</p>
+                    </div>
+                    
+                    {% if result.numerical_predictions %}
+                    <div class="prediction-result">
+                        <h5>Estimated Numerical Outcomes</h5>
+                        <div class="row mt-3">
+                            {% for key, value in result.numerical_predictions.items() %}
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <h6 class="text-muted text-uppercase">{{ key|replace('_', ' ')|capitalize }}</h6>
+                                        <h4 class="text-primary">
+                                            {% if 'percentage' in key or 'rate' in key %}
+                                                {{ value }}%
+                                            {% elif 'months' in key or 'probation' in key or 'sentencing' in key %}
+                                                {{ value }} months
+                                            {% elif value > 999 %}
+                                                ₹{{ '{:,}'.format(value) }}
+                                            {% else %}
+                                                {{ value }}
+                                            {% endif %}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="form-text mt-2">
+                            <i class="fas fa-info-circle me-1"></i> These estimations are based on historical cases similar to yours.
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Tabs for Detailed Analysis -->
+            <ul class="nav nav-tabs" id="resultTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="factors-tab" data-bs-toggle="tab" data-bs-target="#factors" type="button" role="tab" aria-controls="factors" aria-selected="true">
+                        <i class="fas fa-chart-bar me-2"></i> Key Factors
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="precedents-tab" data-bs-toggle="tab" data-bs-target="#precedents" type="button" role="tab" aria-controls="precedents" aria-selected="false">
+                        <i class="fas fa-balance-scale me-2"></i> Relevant Precedents
+                    </button>
+                </li>
+                <!-- <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="text-tab" data-bs-toggle="tab" data-bs-target="#text" type="button" role="tab" aria-controls="text" aria-selected="false">
+                        <i class="fas fa-align-left me-2"></i> Text Analysis
+                    </button>
+                </li> -->
+            </ul>
+            
+            <div class="tab-content p-4 bg-white shadow-sm rounded-bottom" id="resultTabsContent">
+                <!-- Factors Tab -->
+                <div class="tab-pane fade show active" id="factors" role="tabpanel" aria-labelledby="factors-tab">
+                    <h5 class="mb-4">Factors Influencing the Prediction</h5>
+                    <div class="chart-container">
+                        <canvas id="shapVisualization"></canvas>
+                    </div>
+                    <div class="form-text mt-3">
+                        <i class="fas fa-info-circle me-1"></i> Positive values (green) favor a winning outcome, while negative values (red) indicate factors that may hurt your case.
+                    </div>
+                </div>
+                
+                <!-- Precedents Tab -->
+                <div class="tab-pane fade" id="precedents" role="tabpanel" aria-labelledby="precedents-tab">
+                    <h5 class="mb-4">Similar Cases & Legal Precedents</h5>
+                    <div id="precedentsTable"></div>
+                    <div class="form-text mt-3">
+                        <i class="fas fa-info-circle me-1"></i> These precedents might be relevant to your case. The relevance score indicates how similar they are to your situation.
+                    </div>
+                </div>
+                
+                <!-- Text Analysis Tab -->
+                <div class="tab-pane fade" id="text" role="tabpanel" aria-labelledby="text-tab">
+                    <h5 class="mb-4">Text Analysis</h5>
+                    <p>The highlighted sections show which parts of your submission influenced the prediction:</p>
+                    <div id="limeExplanation" class="lime-explanation-container"></div>
+                    <div class="form-text mt-3">
+                        <i class="fas fa-info-circle me-1"></i> Green highlights indicate text that supports a favorable outcome, while red highlights indicate potential challenges.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="javascript:window.print();" class="btn btn-outline-secondary me-2">
+                    <i class="fas fa-print me-2"></i> Print Results
+                </a>
+                {% if session.get('user_id') %}
+                <!-- <a href="#" class="btn btn-outline-primary">
+                     <i class="fas fa-save me-2"></i> Save to My Account 
+                </a> -->
+                {% else %}
+                <a href="{{ url_for('register') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-user-plus me-2"></i> Register to Save Results
+                </a>
+                {% endif %}
+            </div>
+            
+            <div class="alert alert-warning mt-4" role="alert">
+                <i class="fas fa-exclamation-triangle me-2"></i> <strong>Disclaimer:</strong> This prediction is based on machine learning analysis of historical cases and is not legal advice. Please consult with a qualified legal professional before making decisions about your case.
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Render Confidence Gauge
+        renderConfidenceGauge('confidenceGauge', {{ result.probability }}, '{{ result.outcome }}');
+        
+        // Render SHAP Visualization
+        renderShapVisualization('shapVisualization', {{ result.shap_visualization|tojson }});
+        
+        // Render LIME Explanation
+        renderLimeExplanation('limeExplanation', {{ result.lime_explanation|tojson }});
+        
+        // Render Precedents Table
+        renderPrecedentsTable('precedentsTable', {{ result.relevant_cases|tojson }});
+    });
+</script>
+{% endblock %}
+{% endblock %}

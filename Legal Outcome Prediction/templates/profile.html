@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile - Legal Outcome Prediction{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-10 col-lg-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h4 class="mb-0">My Profile</h4>
+                </div>
+                <div class="card-body p-4">
+                    {% if user %}
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-4 mb-md-0">
+                            <div class="avatar-circle mx-auto mb-3">
+                                <span class="avatar-initials">{{ user.username[0] | upper }}</span>
+                            </div>
+                            <h5>{{ user.username }}</h5>
+                            <p class="text-muted">
+                                {% if user.is_lawyer %}
+                                <span class="badge bg-info">Legal Professional</span>
+                                {% else %}
+                                <span class="badge bg-secondary">Citizen</span>
+                                {% endif %}
+                            </p>
+                            <p class="text-muted">Member since: {{ user.created_at.strftime('%B %d, %Y') }}</p>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title mb-4">Account Information</h5>
+                            <div class="mb-3 row">
+                                <label class="col-sm-4 col-form-label">Username:</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-plaintext">{{ user.username }}</p>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-4 col-form-label">Email:</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-plaintext">{{ user.email }}</p>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-4 col-form-label">Account Type:</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-plaintext">
+                                        {% if user.is_lawyer %}
+                                        Legal Professional
+                                        {% else %}
+                                        Citizen
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            {% if user.is_lawyer %}
+                            <div class="mb-3 row">
+                                <label class="col-sm-4 col-form-label">Bar Number:</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-plaintext">{{ user.bar_number or 'Not provided' }}</p>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-4 col-form-label">Practice Area:</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-plaintext">{{ user.practice_area or 'Not provided' }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="text-center">
+                        <button class="btn btn-outline-primary" disabled>Edit Profile</button>
+                        <button class="btn btn-outline-secondary ms-2" disabled>Change Password</button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i> You must be logged in to view your profile.
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+                        <a href="{{ url_for('register') }}" class="btn btn-outline-primary ms-2">Register</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            {% if user and cases %}
+            <div class="card shadow mt-4">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0">Recent Case Predictions</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Case Type</th>
+                                    <th>Prediction</th>
+                                    <th>Confidence</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for case in cases %}
+                                <tr>
+                                    <td>{{ case.created_at.strftime('%Y-%m-%d') }}</td>
+                                    <td>{{ case.case_type }}</td>
+                                    <td>
+                                        {% if case.prediction and case.prediction.predicted_outcome %}
+                                            {% if case.prediction.predicted_outcome == 'Win' %}
+                                            <span class="text-success">{{ case.prediction.predicted_outcome }}</span>
+                                            {% else %}
+                                            <span class="text-danger">{{ case.prediction.predicted_outcome }}</span>
+                                            {% endif %}
+                                        {% else %}
+                                        <span class="text-muted">N/A</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if case.prediction and case.prediction.confidence %}
+                                        {{ (case.prediction.confidence * 100) | round(1) }}%
+                                        {% else %}
+                                        <span class="text-muted">N/A</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-outline-info" disabled>View</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% if not cases %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> You haven't made any case predictions yet.
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .avatar-circle {
+        width: 100px;
+        height: 100px;
+        background-color: var(--bs-info);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .avatar-initials {
+        color: white;
+        font-size: 42px;
+        font-weight: 500;
+        line-height: 1;
+    }
+</style>
+{% endblock %}

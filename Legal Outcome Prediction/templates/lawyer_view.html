@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block title %}Legal Outcome Prediction - Lawyer View{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="mb-3">Legal Professional Case Analyzer</h1>
+            <p class="lead text-muted">Input detailed case information for comprehensive analysis and prediction.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">Case Information Form</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('predict') }}" method="post" class="needs-validation" novalidate>
+                        <input type="hidden" name="user_type" value="lawyer">
+                        
+                        <!-- Case Type -->
+                        <div class="mb-4">
+                            <label for="case_type" class="form-label">Case Type</label>
+                            <select class="form-select" id="case_type" name="case_type" required>
+                                <option value="" selected disabled>Select case type</option>
+                                <option value="civil">Civil Case</option>
+                                <option value="criminal">Criminal Case</option>
+                                <option value="family">Family Law Case</option>
+                                <option value="property">Property Dispute</option>
+                                <option value="tax">Tax Matter</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a case type.
+                            </div>
+                        </div>
+                        
+                        <!-- Additional Fields based on Case Type -->
+                        <div id="additional-fields" class="mb-4">
+                            <!-- Dynamically populated by JavaScript -->
+                        </div>
+                        
+                        <!-- Case Details -->
+                        <div class="mb-4">
+                            <label for="case_details" class="form-label">Case Details</label>
+                            <textarea class="form-control" id="case_details" name="case_details" rows="3" required data-word-count="word-count-details"></textarea>
+                            <div class="word-counter mt-1">
+                                Word count: <span id="word-count-details">0</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide case details.
+                            </div>
+                        </div>
+                        
+                        <!-- Facts -->
+                        <div class="mb-4">
+                            <label for="facts" class="form-label">Material Facts</label>
+                            <textarea class="form-control" id="facts" name="facts" rows="5" required data-word-count="word-count-facts"></textarea>
+                            <div class="word-counter mt-1">
+                                Word count: <span id="word-count-facts">0</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide relevant facts.
+                            </div>
+                        </div>
+                        
+                        <!-- Arguments -->
+                        <div class="mb-4">
+                            <label for="arguments" class="form-label">Legal Arguments</label>
+                            <textarea class="form-control" id="arguments" name="arguments" rows="5" required data-word-count="word-count-arguments"></textarea>
+                            <div class="word-counter mt-1">
+                                Word count: <span id="word-count-arguments">0</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide legal arguments.
+                            </div>
+                        </div>
+                        
+                        <!-- Applicable Laws -->
+                        <div class="mb-4">
+                            <label for="applicable_laws" class="form-label">Applicable Laws and Statutes</label>
+                            <textarea class="form-control" id="applicable_laws" name="applicable_laws" rows="3" required data-word-count="word-count-laws"></textarea>
+                            <div class="word-counter mt-1">
+                                Word count: <span id="word-count-laws">0</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide applicable laws.
+                            </div>
+                        </div>
+                        
+                        <!-- Precedents -->
+                        <div class="mb-4">
+                            <label for="precedents" class="form-label">Relevant Precedents (if any)</label>
+                            <textarea class="form-control" id="precedents" name="precedents" rows="3" data-word-count="word-count-precedents"></textarea>
+                            <div class="word-counter mt-1">
+                                Word count: <span id="word-count-precedents">0</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Legal Issues -->
+                        <div class="mb-4">
+                            <label for="legal_issues" class="form-label">Legal Issues for Determination</label>
+                            <textarea class="form-control" id="legal_issues" name="legal_issues" rows="3" data-word-count="word-count-issues"></textarea>
+                            <div class="word-counter mt-1">
+                                Word count: <span id="word-count-issues">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-info-circle me-2"></i> For best results, provide detailed and specific information about the case.
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-gavel me-2"></i> Analyze and Predict
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Professional Features</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <div class="me-3 text-info">
+                                    <i class="fas fa-balance-scale fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>Legal Precedent Analysis</h5>
+                                    <p class="mb-0">Find relevant case precedents that can strengthen your arguments.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <div class="me-3 text-info">
+                                    <i class="fas fa-chart-bar fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>Statistical Insights</h5>
+                                    <p class="mb-0">View statistical patterns from similar cases across jurisdictions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <div class="me-3 text-info">
+                                    <i class="fas fa-file-export fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>Export Citations</h5>
+                                    <p class="mb-0">Export case citations and analysis in standard legal formats.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Legal Outcome Prediction{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 col-lg-6 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h4 class="mb-0">Create an Account</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ url_for('register') }}" class="needs-validation" novalidate>
+                        <div class="mb-4">
+                            <label for="username" class="form-label">Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                                <div class="invalid-feedback">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="form-label">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid email address.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                <input type="password" class="form-control" id="password" name="password" required minlength="8">
+                                <div class="invalid-feedback">
+                                    Password must be at least 8 characters long.
+                                </div>
+                            </div>
+                            <div class="form-text">Password must be at least 8 characters long.</div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                                <div class="invalid-feedback">
+                                    Passwords do not match.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4 form-check">
+                            <input type="checkbox" class="form-check-input" id="is_lawyer" name="is_lawyer">
+                            <label class="form-check-label" for="is_lawyer">Register as a Legal Professional</label>
+                        </div>
+                        
+                        <div id="lawyer_fields" class="mb-4 d-none">
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i> Additional information for legal professionals
+                            </div>
+                            <div class="mb-3">
+                                <label for="bar_number" class="form-label">Bar Council Registration Number</label>
+                                <input type="text" class="form-control" id="bar_number" name="bar_number">
+                            </div>
+                            <div class="mb-3">
+                                <label for="practice_area" class="form-label">Primary Practice Area</label>
+                                <select class="form-select" id="practice_area" name="practice_area">
+                                    <option value="" selected disabled>Select practice area</option>
+                                    <option value="civil">Civil Law</option>
+                                    <option value="criminal">Criminal Law</option>
+                                    <option value="family">Family Law</option>
+                                    <option value="corporate">Corporate Law</option>
+                                    <option value="property">Property Law</option>
+                                    <option value="tax">Tax Law</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4 form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a>
+                            </label>
+                            <div class="invalid-feedback">
+                                You must agree to our terms before registering.
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-user-plus me-2"></i> Register
+                            </button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-4">
+                        <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>1. Acceptance of Terms</h6>
+                <p>By registering for and using the LegalPredictAI service, you agree to be bound by these Terms and Conditions.</p>
+                
+                <h6>2. Description of Service</h6>
+                <p>LegalPredictAI provides predictions and analysis of legal cases using machine learning algorithms. The service is intended for informational purposes only and should not be considered legal advice.</p>
+                
+                <h6>3. User Accounts</h6>
+                <p>You are responsible for maintaining the confidentiality of your account information and password. You agree to accept responsibility for all activities that occur under your account.</p>
+                
+                <h6>4. Privacy Policy</h6>
+                <p>Your use of LegalPredictAI is also governed by our Privacy Policy, which is incorporated by reference into these Terms and Conditions.</p>
+                
+                <h6>5. Disclaimer of Warranties</h6>
+                <p>The predictions and recommendations provided by LegalPredictAI are based on machine learning algorithms and historical data. While we strive for accuracy, we make no warranties regarding the accuracy, reliability, or completeness of these predictions.</p>
+                
+                <h6>6. Limitation of Liability</h6>
+                <p>LegalPredictAI shall not be liable for any direct, indirect, incidental, special, consequential, or exemplary damages resulting from your use of the service or any decisions made based on the predictions provided.</p>
+                
+                <h6>7. Legal Professional Registration</h6>
+                <p>If you register as a legal professional, you certify that you are a qualified legal practitioner authorized to practice law in your jurisdiction.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle lawyer fields visibility
+        const isLawyerCheckbox = document.getElementById('is_lawyer');
+        const lawyerFields = document.getElementById('lawyer_fields');
+        
+        if (isLawyerCheckbox && lawyerFields) {
+            isLawyerCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    lawyerFields.classList.remove('d-none');
+                } else {
+                    lawyerFields.classList.add('d-none');
+                }
+            });
+        }
+        
+        // Password confirmation validation
+        const passwordField = document.getElementById('password');
+        const confirmPasswordField = document.getElementById('confirm_password');
+        
+        if (confirmPasswordField && passwordField) {
+            confirmPasswordField.addEventListener('input', function() {
+                if (this.value !== passwordField.value) {
+                    this.setCustomValidity('Passwords do not match.');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+            
+            passwordField.addEventListener('input', function() {
+                if (confirmPasswordField.value !== '' && confirmPasswordField.value !== this.value) {
+                    confirmPasswordField.setCustomValidity('Passwords do not match.');
+                } else {
+                    confirmPasswordField.setCustomValidity('');
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

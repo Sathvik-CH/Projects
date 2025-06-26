@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block title %}About Legal Outcome Prediction{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="mb-3">About Our Legal Prediction System</h1>
+            <p class="lead text-muted">Learn more about how our AI-powered legal prediction system works.</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h2 class="mb-4">Legal Outcome Prediction Using Machine Learning</h2>
+                    
+                    <div class="mb-4">
+                        <h3>Introduction</h3>
+                        <p>The Indian legal system, with its vast and intricate web of laws, judgments, and statutes, often presents a daunting challenge when it comes to predicting the outcomes of legal cases. Our system aims to address this challenge using machine learning techniques specifically tailored for the Indian legal context.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>Objectives</h3>
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item">
+                                <i class="fas fa-check-circle text-success me-2"></i> Develop a Machine Learning Model: Fine-tune Legal-BERT on Indian legal data (case laws, statutes, judgments) to predict case outcomes (win/lose).
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-check-circle text-success me-2"></i> Numerical Outcome Prediction: Estimate compensation amounts and sentencing based on historical legal data.
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-check-circle text-success me-2"></i> Explainable AI: Implement explainable AI techniques (e.g., SHAP and LIME) to ensure predictions are transparent and easily understandable by users.
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-check-circle text-success me-2"></i> System for Both Lawyers and Citizens: Ensure the system is beneficial for both legal professionals and non-experts, making legal information more accessible to the public.
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>System Advantages</h3>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <div class="me-3 text-primary">
+                                        <i class="fas fa-bullseye fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Higher Accuracy</h5>
+                                        <p>Tailored specifically for Indian legal data, our model understands the nuances of Indian laws and legal language.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <div class="me-3 text-primary">
+                                        <i class="fas fa-users fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Increased Usability</h5>
+                                        <p>Designed to be accessible for both legal experts and non-experts with different interface options.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <div class="me-3 text-primary">
+                                        <i class="fas fa-glasses fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Transparency</h5>
+                                        <p>Explainable AI techniques build trust by revealing the factors behind each prediction.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <div class="me-3 text-primary">
+                                        <i class="fas fa-chart-pie fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Comprehensive Prediction</h5>
+                                        <p>Includes both case outcomes and numerical predictions for a full picture of potential results.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>Technology Behind the System</h3>
+                        <p>Our system leverages several advanced technologies to provide accurate and explainable predictions:</p>
+                        
+                        <div class="accordion" id="techAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <i class="fas fa-microchip me-2"></i> Fine-tuned Legal-BERT
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#techAccordion">
+                                    <div class="accordion-body">
+                                        <p>Legal-BERT is a variant of BERT (Bidirectional Encoder Representations from Transformers) that has been pre-trained on legal texts. We further fine-tune this model on Indian legal data, including case laws, statutes, and judgments, to make it more accurate for the Indian legal context.</p>
+                                        <p>This approach allows the model to understand the nuances and specific terminology used in Indian legal documents, leading to more precise predictions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <i class="fas fa-lightbulb me-2"></i> SHAP and LIME for Explainability
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#techAccordion">
+                                    <div class="accordion-body">
+                                        <p>SHAP (SHapley Additive exPlanations) and LIME (Local Interpretable Model-agnostic Explanations) are techniques that help explain the predictions made by complex machine learning models.</p>
+                                        <p>SHAP assigns each feature an importance value that indicates how much it contributes to a prediction. LIME creates a simpler, interpretable model that approximates the behavior of the complex model for a specific prediction.</p>
+                                        <p>By using these techniques, our system can provide transparent explanations for why a particular outcome was predicted, making the "black box" of AI more understandable to users.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <i class="fas fa-calculator me-2"></i> Regression Models for Numerical Predictions
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#techAccordion">
+                                    <div class="accordion-body">
+                                        <p>Beyond predicting binary outcomes (win/lose), our system uses specialized regression models to estimate numerical values such as compensation amounts, sentencing duration, and damages.</p>
+                                        <p>These models analyze historical case data to identify patterns in how courts have awarded damages or determined sentences in similar cases, providing users with valuable insights into potential numerical outcomes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        <i class="fas fa-database me-2"></i> Comprehensive Indian Legal Database
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#techAccordion">
+                                    <div class="accordion-body">
+                                        <p>Our system is built upon a comprehensive database of Indian legal documents, including Supreme Court and High Court judgments, statutes, and legal commentaries.</p>
+                                        <p>This database allows the system to retrieve relevant case precedents that match the current case, providing users with valuable references that can strengthen their legal arguments.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>Disclaimer and Limitations</h3>
+                        <div class="alert alert-warning">
+                            <h5><i class="fas fa-exclamation-triangle me-2"></i> Important Notice</h5>
+                            <p>This system is designed as a decision support tool and not as a replacement for professional legal advice. The predictions and recommendations provided by this system should be used as supplementary information only.</p>
+                            <p>Legal outcomes depend on many factors, including the specific court, judge, and unique circumstances of each case. While our system analyzes patterns from historical data, it cannot account for all variables that might influence a legal decision.</p>
+                            <p>We strongly recommend consulting with a qualified legal professional before making any decisions based on the predictions provided by this system.</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3>Project Team</h3>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Student Researchers</h5>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2">CH.SATHVIK (22261A05D9)</li>
+                                            <li class="mb-2">D.KRISHNA KARTHIK (22261A05E1)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Project Guides</h5>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2">Dr. K. Sreekala (Assistant Professor)</li>
+                                            <li class="mb-2">Mr. Y. Pavan Narasimha Rao (Assistant Professor)</li>
+                                        </ul>
+                                        <p class="card-text mt-2">Department of Computer Science and Engineering<br>Mahatma Gandhi Institute of Technology</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

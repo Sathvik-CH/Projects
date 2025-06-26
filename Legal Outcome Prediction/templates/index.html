@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block title %}Legal Outcome Prediction - Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container text-center">
+        <h1 class="display-4 mb-4">Legal Outcome Prediction Using Machine Learning</h1>
+        <p class="lead mb-5">An advanced AI system designed to predict case outcomes, recommend relevant precedents, and estimate numerical results like compensation and sentencing.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ url_for('citizen_view') }}" class="btn btn-primary btn-lg">Citizen View</a>
+            <a href="{{ url_for('lawyer_view') }}" class="btn btn-outline-light btn-lg">Lawyer View</a>
+        </div>
+    </div>
+</section>
+
+<!-- Main Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="section-heading">How It Works</h2>
+                <p class="lead text-muted">Our system uses fine-tuned Legal-BERT models trained on Indian legal data to provide accurate and explainable predictions.</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Feature 1 -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="my-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <h4 class="card-title">Case Outcome Prediction</h4>
+                        <p class="card-text">Predict the likelihood of winning or losing your case based on historical patterns and legal precedents.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="my-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="card-title">Relevant Case Precedents</h4>
+                        <p class="card-text">Discover similar cases and relevant precedents that can strengthen your legal arguments.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="my-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="6" width="22" height="12" rx="2" ry="2"></rect>
+                                <line x1="1" y1="12" x2="23" y2="12"></line>
+                            </svg>
+                        </div>
+                        <h4 class="card-title">Numerical Estimations</h4>
+                        <p class="card-text">Estimate compensation amounts, sentencing, and other numerical outcomes based on similar historical cases.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- User Types Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading">For Everyone in the Legal Ecosystem</h2>
+                <p class="lead text-muted">Whether you're a legal professional or an ordinary citizen, our system is designed to help you navigate the complexities of the Indian legal system.</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Citizen Card -->
+            <div class="col-lg-6">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">For Citizens</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex">
+                                <div class="me-3 text-success">
+                                    <i class="fas fa-check-circle fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5>Simple Interface</h5>
+                                    <p class="mb-0">User-friendly input forms with minimal legal jargon.</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex">
+                                <div class="me-3 text-success">
+                                    <i class="fas fa-check-circle fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5>Plain Language Explanations</h5>
+                                    <p class="mb-0">Get predictions explained in clear, non-technical language.</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex">
+                                <div class="me-3 text-success">
+                                    <i class="fas fa-check-circle fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5>Case Merit Assessment</h5>
+                                    <p class="mb-0">Understand if your case is worth pursuing before investing time and money.</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="text-center mt-4">
+                            <a href="{{ url_for('citizen_view') }}" class="btn btn-primary">Try Citizen View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lawyer Card -->
+            <div class="col-lg-6">
+                <div class="card h-100">
+                    <div class="card-header bg-info text-white">
+                        <h4 class="mb-0">For Legal Professionals</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex">
+                                <div class="me-3 text-success">
+                                    <i class="fas fa-check-circle fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5>Advanced Legal Analysis</h5>
+                                    <p class="mb-0">Detailed analysis with technical legal terminology and nuanced predictions.</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex">
+                                <div class="me-3 text-success">
+                                    <i class="fas fa-check-circle fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5>Precedent Citations</h5>
+                                    <p class="mb-0">Access to relevant case precedents with proper citations for legal briefs.</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex">
+                                <div class="me-3 text-success">
+                                    <i class="fas fa-check-circle fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5>Statistical Insights</h5>
+                                    <p class="mb-0">Statistical breakdown of similar cases and their outcomes in different courts.</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="text-center mt-4">
+                            <a href="{{ url_for('lawyer_view') }}" class="btn btn-info">Try Lawyer View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technology Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading">Powered by Advanced Technology</h2>
+                <p class="lead text-muted">Our system leverages state-of-the-art machine learning models specifically tailored for the Indian legal context.</p>
+            </div>
+        </div>
+        
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><rect width='800' height='600' fill='%232c3e50'/><path d='M400,100 L700,300 L400,500 L100,300 Z' fill='none' stroke='%233498db' stroke-width='8'/><circle cx='400' cy='100' r='20' fill='%23e74c3c'/><circle cx='700' cy='300' r='20' fill='%232ecc71'/><circle cx='400' cy='500' r='20' fill='%23f39c12'/><circle cx='100' cy='300' r='20' fill='%239b59b6'/><path d='M400,100 L100,300' stroke='%23ecf0f1' stroke-width='5' stroke-dasharray='20,10'/><path d='M400,100 L700,300' stroke='%23ecf0f1' stroke-width='5' stroke-dasharray='20,10'/><path d='M400,500 L100,300' stroke='%23ecf0f1' stroke-width='5' stroke-dasharray='20,10'/><path d='M400,500 L700,300' stroke='%23ecf0f1' stroke-width='5' stroke-dasharray='20,10'/><circle cx='400' cy='300' r='50' fill='%233498db' opacity='0.6'/><text x='385' y='305' font-family='Arial' font-size='20' fill='white'>AI</text></svg>" alt="AI Technology Illustration" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-lg-6">
+                <h3 class="mb-4">What makes our system unique?</h3>
+                <div class="d-flex mb-4">
+                    <div class="me-3 text-info">
+                        <i class="fas fa-brain fa-2x"></i>
+                    </div>
+                    <div>
+                        <h5>Fine-tuned Legal-BERT</h5>
+                        <p>Our model is fine-tuned on thousands of Indian legal cases, statutes, and judgments for superior accuracy in the Indian context.</p>
+                    </div>
+                </div>
+                <div class="d-flex mb-4">
+                    <div class="me-3 text-info">
+                        <i class="fas fa-lightbulb fa-2x"></i>
+                    </div>
+                    <div>
+                        <h5>Explainable AI</h5>
+                        <p>Using SHAP and LIME techniques, our system provides transparent explanations for predictions, making the "black box" of AI more understandable.</p>
+                    </div>
+                </div>
+                <div class="d-flex mb-4">
+                    <div class="me-3 text-info">
+                        <i class="fas fa-chart-line fa-2x"></i>
+                    </div>
+                    <div>
+                        <h5>Numerical Prediction Models</h5>
+                        <p>Specialized regression models for different case types to estimate compensation, sentencing, and other numerical outcomes.</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="me-3 text-info">
+                        <i class="fas fa-database fa-2x"></i>
+                    </div>
+                    <div>
+                        <h5>Indian Legal Database</h5>
+                        <p>Comprehensive database of Indian case laws, legal precedents, and statutes for more relevant recommendations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Ready to get started?</h2>
+        <p class="lead mb-5">Try our prediction system now and get insights into your legal case.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ url_for('citizen_view') }}" class="btn btn-light btn-lg">For Citizens</a>
+            <a href="{{ url_for('lawyer_view') }}" class="btn btn-outline-light btn-lg">For Lawyers</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

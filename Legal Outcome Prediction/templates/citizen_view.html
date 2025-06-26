@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block title %}Legal Outcome Prediction - Citizen View{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="mb-3">Simple Legal Case Predictor</h1>
+            <p class="lead text-muted">Get insights about your legal case in plain, understandable language.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Tell Us About Your Case</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('predict') }}" method="post" class="needs-validation" novalidate>
+                        <input type="hidden" name="user_type" value="citizen">
+                        
+                        <!-- Case Type -->
+                        <div class="mb-4">
+                            <label for="case_type" class="form-label">What type of case do you have?</label>
+                            <select class="form-select" id="case_type" name="case_type" required>
+                                <option value="" selected disabled>Select case type</option>
+                                <option value="civil">Civil Case (disputes between people or organizations)</option>
+                                <option value="criminal">Criminal Case (offenses against the state/society)</option>
+                                <option value="family">Family Law (divorce, custody, maintenance, etc.)</option>
+                                <option value="property">Property Dispute</option>
+                                <option value="tax">Tax Matter</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a case type.
+                            </div>
+                        </div>
+                        
+                        <!-- Additional Fields based on Case Type -->
+                        <div id="additional-fields" class="mb-4">
+                            <!-- Dynamically populated by JavaScript -->
+                        </div>
+                        
+                        <!-- Case Details -->
+                        <div class="mb-4">
+                            <label for="case_details" class="form-label">What is your case about? (Brief overview)</label>
+                            <textarea class="form-control" id="case_details" name="case_details" rows="3" required data-word-count="word-count-details" placeholder="Example: I am involved in a property dispute with my neighbor over boundary walls."></textarea>
+                            <div class="word-counter mt-1">
+                                Word count: <span id="word-count-details">0</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide some details about your case.
+                            </div>
+                        </div>
+                        
+                        <!-- Facts -->
+                        <div class="mb-4">
+                            <label for="facts" class="form-label">What are the important facts of your case?</label>
+                            <textarea class="form-control" id="facts" name="facts" rows="4" required data-word-count="word-count-facts" placeholder="Example: I purchased the property in 2015 with clear documentation. The disputed area has been in my possession since then."></textarea>
+                            <div class="word-counter mt-1">
+                                Word count: <span id="word-count-facts">0</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide the important facts.
+                            </div>
+                        </div>
+                        
+                        <!-- Arguments -->
+                        <div class="mb-4">
+                            <label for="arguments" class="form-label">Why do you think you should win this case? (Your arguments)</label>
+                            <textarea class="form-control" id="arguments" name="arguments" rows="4" data-word-count="word-count-arguments" placeholder="Example: I have all the legal papers showing ownership. The survey clearly marks the boundary line in my favor."></textarea>
+                            <div class="word-counter mt-1">
+                                Word count: <span id="word-count-arguments">0</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Applicable Laws -->
+                        <div class="mb-4">
+                            <label for="applicable_laws" class="form-label">Do you know any laws or rules that apply to your case? (Optional)</label>
+                            <textarea class="form-control" id="applicable_laws" name="applicable_laws" rows="2" data-word-count="word-count-laws" placeholder="Example: Property Act, Section 54"></textarea>
+                            <div class="word-counter mt-1">
+                                Word count: <span id="word-count-laws">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-info-circle me-2"></i> The more information you provide, the more accurate our prediction will be.
+                        </div>
+                        
+                        <div class="form-text mb-4">
+                            <i class="fas fa-lock me-1"></i> Your information is kept private and secure.
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-search me-2"></i> Predict My Case Outcome
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">How This Helps You</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-lightbulb fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>Know Your Chances</h5>
+                                    <p class="mb-0">Understand if your case has a good chance of success before investing time and money.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-comment-dollar fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>Estimate Outcomes</h5>
+                                    <p class="mb-0">Get estimates of potential compensation or penalties based on similar cases.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-clipboard-list fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>Better Preparation</h5>
+                                    <p class="mb-0">Learn what factors might help or hurt your case to prepare better.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
